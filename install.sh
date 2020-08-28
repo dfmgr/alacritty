@@ -33,11 +33,6 @@ else
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Install Type: user_installdirs system_installdirs
-
-user_installdirs
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # OS Support: supported_os unsupported_oses
 
 unsupported_oses
@@ -57,23 +52,28 @@ PLUGNAMES=""
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+# Set options
+
+APPDIR="${HOMEDIR:-$CONF}/$APPNAME"
+PLUGDIR="$SHARE/$APPNAME"
+REPO="${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 # Version
 
 APPVERSION="$(curl -LSs ${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME/raw/master/version.txt)"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+# USE one or the other
+# Install Type: user_installdirs system_installdirs
+
+#user_installdirs
+
 # dfmgr_install fontmgr_install iconmgr_install pkmgr_install systemmgr_install thememgr_install wallpapermgr_install
 
 dfmgr_install
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-# Set options
-
-APPDIR="${APPDIR:-$CONF/$APPNAME}"
-PLUGDIR="$SHARE/$APPNAME"
-REPO="${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
