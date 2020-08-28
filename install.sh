@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-APPNAME="$(basename $0)"
+APPNAME="alacritty"
 USER="${SUDO_USER:-${USER}}"
 HOME="${USER_HOME:-${HOME}}"
 
@@ -48,7 +48,6 @@ scripts_check
 
 # Defaults
 
-APPNAME="alacritty"
 APPDIR="${APPDIR:-$HOME/.config}/${APPNAME}"
 REPO="${DFMGRREPO:-https://github.com/dfmgr}/${APPNAME}"
 REPORAW="${REPORAW:-$REPO/$APPNAME/raw}"
