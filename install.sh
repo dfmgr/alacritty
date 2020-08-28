@@ -51,6 +51,8 @@ scripts_check
 APPNAME="alacritty"
 APPDIR="${APPDIR:-$HOME/.config}/${APPNAME}"
 REPO="${DFMGRREPO:-https://github.com/dfmgr}/${APPNAME}"
+REPORAW="${REPORAW:-$REPO/$APPNAME/raw}"
+APPVERSION="$(curl -LSs $REPORAW/master/version.txt)"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
