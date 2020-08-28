@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-APPNAME="$(basename $0)"
+APPNAME="alacritty"
 USER="${SUDO_USER:-${USER}}"
 HOME="${USER_HOME:-${HOME}}"
 
@@ -52,6 +52,12 @@ PLUGNAMES=""
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+# Install Type: user_installdirs system_installdirs
+
+user_installdirs
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 # Set options
 
 APPDIR="${HOMEDIR:-$CONF}/$APPNAME"
@@ -65,11 +71,6 @@ REPO="${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME"
 APPVERSION="$(curl -LSs ${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME/raw/master/version.txt)"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-# USE one or the other
-# Install Type: user_installdirs system_installdirs
-
-#user_installdirs
 
 # dfmgr_install fontmgr_install iconmgr_install pkmgr_install systemmgr_install thememgr_install wallpapermgr_install
 
