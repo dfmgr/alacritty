@@ -33,6 +33,13 @@ else
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Install Type: user_installdirs system_installdirs
+
+user_installdirs
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 # OS Support: supported_os unsupported_oses
 
 unsupported_oses
@@ -48,33 +55,24 @@ scripts_check
 # Defaults
 
 APPNAME="alacritty"
-PLUGNAMES=""
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-# Install Type: user_installdirs system_installdirs
-
-user_installdirs
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-# Set options
-
-APPDIR="${HOMEDIR:-$CONF}/$APPNAME"
 PLUGDIR="$SHARE/$APPNAME"
+APPDIR="${HOMEDIR:-$CONF}/$APPNAME"
 REPO="${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Set plugin names
 
-# Version
-
-APPVERSION="$(curl -LSs ${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME/raw/master/version.txt)"
+PLUGNAMES=""
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # dfmgr_install fontmgr_install iconmgr_install pkmgr_install systemmgr_install thememgr_install wallpapermgr_install
 
 dfmgr_install
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Version
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
