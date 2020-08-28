@@ -33,6 +33,7 @@ else
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+user_installdirs
 
 # OS Support: supported_os unsupported_oses
 
@@ -47,10 +48,10 @@ scripts_check
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Defaults
-
-APPDIR="${APPDIR:-$HOME/.config}/${APPNAME}"
+APPNAME="${APPNAME:-alacritty}"
+APPDIR="${APPDIR:-$HOME/.config/$APPNAME}"
 REPO="${DFMGRREPO:-https://github.com/dfmgr}/${APPNAME}"
-REPORAW="${REPORAW:-$REPO/$APPNAME/raw}"
+REPORAW="${REPORAW:-$REPO/raw}"
 APPVERSION="$(curl -LSs $REPORAW/master/version.txt)"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
