@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-APPNAME="alacritty"
+APPNAME="$(basename $0)"
 USER="${SUDO_USER:-${USER}}"
 HOME="${USER_HOME:-${HOME}}"
 
@@ -34,12 +34,6 @@ fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Install Type: user_installdirs system_installdirs
-
-user_installdirs
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 # OS Support: supported_os unsupported_oses
 
 unsupported_oses
@@ -55,14 +49,15 @@ scripts_check
 # Defaults
 
 APPNAME="alacritty"
-PLUGDIR="$SHARE/$APPNAME"
-APPDIR="${HOMEDIR:-$CONF}/$APPNAME"
-REPO="${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME"
+APPDIR="${APPDIR:-$HOME/.config}/${APPNAME}"
+REPO="${DFMGRREPO:-https://github.com/dfmgr}/${APPNAME}"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Set plugin names
+
+# Setup plugins
 
 PLUGNAMES=""
+PLUGDIR="${SHARE:-$HOME/.local/share}"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
