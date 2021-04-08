@@ -115,7 +115,6 @@ ensure_dirs
 ensure_perms
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Backup if needed
-printf_exit "A:$APPDIR I:$INSTDIR"
 if [ -d "$APPDIR" ]; then
   execute "backupapp $APPDIR $APPNAME" "Backing up $APPDIR"
 fi
