@@ -52,9 +52,10 @@ scripts_check
 APPNAME="${APPNAME:-alacritty}"
 APPDIR="${APPDIR:-$HOME/.config/$APPNAME}"
 INSTDIR="${INSTDIR:-$HOME/.local/share/CasjaysDev/dfmgr/$APPNAME}"
+REPO_BRANCH=${GIT_REPO_BRANCH:-master}
 REPO="${REPO:-https://github.com/dfmgr/$APPNAME}"
-REPORAW="${REPORAW:-$REPO/$GIT_REPO_BRANCH}"
-APPVERSION="$(__appversion "$REPORAW/version.txt")"
+REPORAW="${REPORAW:-$REPO/raw/$REPO_BRANCH}"
+APPVERSION="${APPVERSION:-$(__appversion "$REPORAW/version.txt")}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Setup plugins
 PLUGNAMES=""
