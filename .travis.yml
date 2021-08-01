@@ -6,9 +6,9 @@
 sudo: enabled
 
 install:
-  - sudo bash -c "$(curl -LSs https://github.com/dfmgr/installer/raw/master/install.sh)"
+  - sudo bash -c "$(curl -LSs https://github.com/dfmgr/installer/raw/main/install.sh)"
   - sudo bash -c "pkmgr init ; pkmgr update"
-  - sudo bash -c "$(curl -LSs https://github.com/dfmgr/installer/raw/master/install.sh)"
+  - sudo bash -c "$(curl -LSs https://github.com/dfmgr/installer/raw/main/install.sh)"
   - dotfiles install alacritty
   - bash -c "[ -f $(command -v alacritty >/dev/null 2>&1) ] && timeout --signal=9 --foreground --preserve-status 5 alacritty || true"
 
