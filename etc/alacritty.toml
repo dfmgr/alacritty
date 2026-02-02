@@ -1,11 +1,16 @@
+# Alacritty Configuration
+# See: https://alacritty.org/config-alacritty.html
+
+[general]
 # Import theme - change to use a different theme from ./themes/
 import = ["./themes/dracula.toml"]
-
-[colors]
-draw_bold_text_with_bright_colors = true
+live_config_reload = true
 
 [env]
 TERM = "xterm-256color"
+
+[colors]
+draw_bold_text_with_bright_colors = true
 
 [font]
 size = 11.0
@@ -30,8 +35,104 @@ style = "Regular"
 x = 0
 y = 1
 
+[scrolling]
+history = 5000
+
+[bell]
+animation = "EaseOutExpo"
+color = "#ffffff"
+duration = 1
+
+[window]
+dynamic_padding = false
+dynamic_title = true
+opacity = 0.98
+startup_mode = "Maximized"
+title = "Alacritty"
+
+[window.class]
+instance = "Alacritty"
+general = "Alacritty"
+
+[window.padding]
+x = 6
+y = 6
+
+[cursor]
+unfocused_hollow = true
+blink_interval = 500
+blink_timeout = 0
+
+[cursor.style]
+shape = "Beam"
+blinking = "On"
+
+[mouse]
+hide_when_typing = true
+
+[selection]
+save_to_clipboard = false
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[terminal]
+osc52 = "CopyPaste"
+# Uncomment ONE of the following to auto-start a multiplexer:
+# shell = { program = "/usr/bin/tmux", args = ["new-session", "-A", "-s", "main"] }
+# shell = { program = "/usr/bin/screen", args = ["-xRR"] }
+# shell = { program = "/usr/bin/zellij", args = ["attach", "--create", "main"] }
+
+[debug]
+persistent_logging = true
+
 # ====================
-# Help (Ctrl+? to show keybindings)
+# Mouse Bindings
+# ====================
+[[mouse.bindings]]
+mouse = "Middle"
+action = "PasteSelection"
+
+[[mouse.bindings]]
+mouse = "Right"
+action = "Paste"
+
+# Ctrl+click to open URLs
+[[mouse.bindings]]
+mouse = "Left"
+mods = "Control"
+action = "Open"
+
+# ====================
+# Hints (keyboard-driven URL/path opening)
+# ====================
+# Press Ctrl+Shift+O to highlight URLs, then type the hint key to open
+[[hints.enabled]]
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+hyperlinks = true
+command = "xdg-open"
+post_processing = true
+binding = { key = "O", mods = "Control|Shift" }
+mouse = { enabled = true, mods = "None" }
+
+# File paths (Ctrl+Shift+P)
+[[hints.enabled]]
+regex = "(~|/)[\\w./-]+"
+hyperlinks = false
+command = { program = "sh", args = ["-c", "if [ -d \"$0\" ]; then xdg-open \"$0\"; elif [ -f \"$0\" ]; then ${EDITOR:-vim} \"$0\"; fi"] }
+post_processing = false
+binding = { key = "P", mods = "Control|Shift" }
+mouse = { enabled = false }
+
+# IP addresses (Ctrl+Shift+I)
+[[hints.enabled]]
+regex = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}(:[0-9]+)?"
+hyperlinks = false
+command = { program = "sh", args = ["-c", "echo -n \"$0\" | xclip -selection clipboard && notify-send 'Copied' \"$0\""] }
+post_processing = false
+binding = { key = "I", mods = "Control|Shift" }
+mouse = { enabled = false }
+
+# ====================
+# Help (Ctrl+Shift+/ to show keybindings)
 # ====================
 [[keyboard.bindings]]
 key = "Slash"
@@ -56,22 +157,12 @@ action = "PasteSelection"
 key = "Insert"
 mods = "Shift"
 
-[[keyboard.bindings]]
-action = "Paste"
-key = "Paste"
-mods = "None"
-
-[[keyboard.bindings]]
-action = "Copy"
-key = "Copy"
-mods = "None"
-
 # ====================
-# Font size (xfce4-terminal style)
+# Font size
 # ====================
 [[keyboard.bindings]]
 action = "ResetFontSize"
-key = "Key0"
+key = "0"
 mods = "Control"
 
 [[keyboard.bindings]]
@@ -95,7 +186,6 @@ mods = "Control"
 [[keyboard.bindings]]
 action = "ToggleFullscreen"
 key = "F11"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "CreateNewWindow"
@@ -120,11 +210,6 @@ action = "ClearHistory"
 key = "K"
 mods = "Control|Shift"
 
-[[keyboard.bindings]]
-action = "ResetTerminal"
-key = "R"
-mods = "Control|Shift"
-
 # ====================
 # Scrolling
 # ====================
@@ -132,13 +217,11 @@ mods = "Control|Shift"
 action = "ScrollPageUp"
 key = "PageUp"
 mode = "~Alt"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "ScrollPageDown"
 key = "PageDown"
 mode = "~Alt"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "ScrollToTop"
@@ -173,7 +256,7 @@ key = "Down"
 mods = "Control|Shift"
 
 # ====================
-# Search (xfce4-terminal style: Ctrl+Shift+F)
+# Search (Ctrl+Shift+F)
 # ====================
 [[keyboard.bindings]]
 action = "SearchForward"
@@ -190,19 +273,16 @@ mods = "Control|Shift"
 action = "SearchConfirm"
 key = "Return"
 mode = "Search"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "SearchCancel"
 key = "Escape"
 mode = "Search"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "SearchFocusNext"
 key = "N"
 mode = "Search"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "SearchFocusPrevious"
@@ -214,13 +294,11 @@ mods = "Shift"
 action = "SearchFocusNext"
 key = "Down"
 mode = "Search"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "SearchFocusPrevious"
 key = "Up"
 mode = "Search"
-mods = "None"
 
 # ====================
 # Vi Mode (toggle with Ctrl+Shift+Space)
@@ -235,44 +313,37 @@ mods = "Control|Shift"
 action = "Up"
 key = "K"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "Down"
 key = "J"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "Left"
 key = "H"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "Right"
 key = "L"
 mode = "Vi"
-mods = "None"
 
 # Vi word movement
 [[keyboard.bindings]]
 action = "SemanticRight"
 key = "W"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "SemanticLeft"
 key = "B"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "SemanticRightEnd"
 key = "E"
 mode = "Vi"
-mods = "None"
 
 # Vi WORD movement (whitespace delimited)
 [[keyboard.bindings]]
@@ -296,19 +367,18 @@ mods = "Shift"
 # Vi line movement
 [[keyboard.bindings]]
 action = "First"
-key = "Key0"
+key = "0"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "Last"
-key = "Key4"
+key = "4"
 mode = "Vi"
 mods = "Shift"
 
 [[keyboard.bindings]]
 action = "FirstOccupied"
-key = "Key6"
+key = "6"
 mode = "Vi"
 mods = "Shift"
 
@@ -323,7 +393,6 @@ mods = "Shift"
 action = "ScrollToBottom"
 key = "G"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "ScrollHalfPageUp"
@@ -360,7 +429,6 @@ mods = "Shift"
 action = "ToggleNormalSelection"
 key = "V"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "ToggleLineSelection"
@@ -374,12 +442,11 @@ key = "V"
 mode = "Vi"
 mods = "Control"
 
-# Vi search in vi mode
+# Vi search
 [[keyboard.bindings]]
 action = "SearchForward"
 key = "Slash"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "SearchBackward"
@@ -391,7 +458,6 @@ mods = "Shift"
 action = "SearchNext"
 key = "N"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "SearchPrevious"
@@ -404,37 +470,32 @@ mods = "Shift"
 action = "Copy"
 key = "Y"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "ClearSelection"
 key = "Escape"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "ToggleViMode"
 key = "I"
 mode = "Vi"
-mods = "None"
 
 [[keyboard.bindings]]
 action = "ToggleViMode"
 key = "Q"
 mode = "Vi"
-mods = "None"
 
 # Vi open URLs/hints
 [[keyboard.bindings]]
 action = "Open"
 key = "O"
 mode = "Vi"
-mods = "None"
 
 # Vi bracket matching
 [[keyboard.bindings]]
 action = "Bracket"
-key = "Key5"
+key = "5"
 mode = "Vi"
 mods = "Shift"
 
@@ -442,62 +503,57 @@ mods = "Shift"
 # Multiplexer Integration (tmux/screen/zellij)
 # ====================
 # These send escape sequences that multiplexers can bind to.
-# Alt+1-9: Switch to window/tab 1-9 (configure in your multiplexer)
-# Alt+n/p: Next/previous window
-# Alt+c: New window
-# Alt+d: Detach
-# Alt+z: Zoom/maximize pane
 
 # Alt+1 through Alt+9 - send to multiplexer for tab switching
 [[keyboard.bindings]]
 chars = "\u001b1"
-key = "Key1"
+key = "1"
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001b2"
-key = "Key2"
+key = "2"
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001b3"
-key = "Key3"
+key = "3"
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001b4"
-key = "Key4"
+key = "4"
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001b5"
-key = "Key5"
+key = "5"
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001b6"
-key = "Key6"
+key = "6"
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001b7"
-key = "Key7"
+key = "7"
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001b8"
-key = "Key8"
+key = "8"
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001b9"
-key = "Key9"
+key = "9"
 mods = "Alt"
 
 # Alt+0 - window 10
 [[keyboard.bindings]]
 chars = "\u001b0"
-key = "Key0"
+key = "0"
 mods = "Alt"
 
 # Alt+n - next window
@@ -562,127 +618,3 @@ mods = "Alt"
 chars = "\u001b[1;3D"
 key = "Left"
 mods = "Alt"
-
-[general]
-live_config_reload = true
-
-[scrolling]
-history = 5000
-
-[bell]
-animation = "EaseOutExpo"
-color = "#ffffff"
-duration = 1
-
-[window]
-dynamic_padding = false
-dynamic_title = true
-opacity = 0.98
-startup_mode = "Maximized"
-title = "Alacritty"
-
-[window.class]
-general = "Alacritty"
-gtk_theme_variant = "Dark"
-instance = "Alacritty"
-
-[window.padding]
-x = 6
-y = 6
-
-[cursor]
-unfocused_hollow = true
-blink_interval = 500
-blink_timeout = 0
-
-[cursor.style]
-shape = "Beam"
-blinking = "On"
-
-[mouse]
-hide_when_typing = true
-
-# ====================
-# Mouse Bindings
-# ====================
-[[mouse.bindings]]
-mouse = "Middle"
-action = "PasteSelection"
-
-[[mouse.bindings]]
-mouse = "Right"
-action = "Paste"
-
-# Ctrl+click to open URLs
-[[mouse.bindings]]
-mouse = "Left"
-mods = "Control"
-action = "Open"
-
-# Alt+click for block selection
-[[mouse.bindings]]
-mouse = "Left"
-mods = "Alt"
-action = "BlockSelectionStart"
-
-[selection]
-save_to_clipboard = false
-semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
-
-[debug]
-persistent_logging = true
-
-# ====================
-# Hints (keyboard-driven URL/path opening)
-# ====================
-# Press Ctrl+Shift+O to highlight URLs, then type the hint key to open
-[[hints.enabled]]
-regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
-hyperlinks = true
-command = "xdg-open"
-post_processing = true
-mouse.enabled = true
-mouse.mods = "None"
-binding.key = "O"
-binding.mods = "Control|Shift"
-
-# File paths (Ctrl+Shift+P)
-[[hints.enabled]]
-regex = "(~|/)[\\w./-]+"
-hyperlinks = false
-command = { program = "sh", args = ["-c", "if [ -d \"$0\" ]; then xdg-open \"$0\"; elif [ -f \"$0\" ]; then ${EDITOR:-vim} \"$0\"; fi"] }
-post_processing = false
-mouse.enabled = false
-binding.key = "P"
-binding.mods = "Control|Shift"
-
-# IP addresses (Ctrl+Shift+I)
-[[hints.enabled]]
-regex = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}(:[0-9]+)?"
-hyperlinks = false
-command = { program = "sh", args = ["-c", "echo -n \"$0\" | xclip -selection clipboard && notify-send 'Copied' \"$0\""] }
-post_processing = false
-mouse.enabled = false
-binding.key = "I"
-binding.mods = "Control|Shift"
-
-# ====================
-# Terminal / Shell
-# ====================
-# Uncomment ONE of the following to auto-start a multiplexer:
-
-# Auto-start tmux (recommended)
-# [terminal]
-# shell = { program = "/usr/bin/tmux", args = ["new-session", "-A", "-s", "main"] }
-
-# Auto-start screen
-# [terminal]
-# shell = { program = "/usr/bin/screen", args = ["-xRR"] }
-
-# Auto-start zellij
-# [terminal]
-# shell = { program = "/usr/bin/zellij", args = ["attach", "--create", "main"] }
-
-# Default shell (no multiplexer)
-[terminal]
-osc52 = "CopyPaste"
